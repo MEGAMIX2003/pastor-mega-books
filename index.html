@@ -60,7 +60,7 @@ section{padding:80px 0}
 .shelf-title{display:flex;align-items:center;gap:14px;margin:46px 0 20px;font-family:'Playfair Display',Georgia,serif;font-size:26px}
 .shelf-title::after{content:"";flex:1;height:2px;background:linear-gradient(90deg,var(--gold),transparent)}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:26px}
-.book{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s}
+.book{position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s}
 .book:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(11,26,61,.12)}
 .book .cover{background:linear-gradient(160deg,var(--navy2),var(--navy));padding:24px 60px}
 .book .cover img{border-radius:4px;box-shadow:0 12px 26px rgba(0,0,0,.45);aspect-ratio:2/3;object-fit:cover;width:100%}
@@ -71,7 +71,14 @@ section{padding:80px 0}
 .price{font-weight:700;font-size:18px;white-space:nowrap}
 .price small{display:block;font-weight:500;font-size:12px;color:var(--muted)}
 .book .btn{padding:11px 18px;font-size:15px}
-.tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:#fff4d6;color:#8a5a00;border-radius:999px;padding:3px 10px;margin-bottom:8px;align-self:flex-start}
+.tag{position:absolute;top:14px;left:14px;z-index:2;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--gold);color:var(--navy);border-radius:999px;padding:4px 11px;box-shadow:0 4px 12px rgba(0,0,0,.3)}
+/* guide card: fills the empty slot on the 5-book shelf */
+.guide{background:linear-gradient(160deg,var(--navy2),var(--navy));color:#fff;border-radius:16px;padding:30px 26px;display:flex;flex-direction:column;justify-content:center}
+.guide h3{font-size:26px;margin-bottom:12px}
+.guide ul{list-style:none;padding:0;margin:0 0 22px}
+.guide li{padding:9px 0;border-bottom:1px solid rgba(255,255,255,.12);font-size:15px;color:#dbe4ff}
+.guide li b{color:var(--gold);display:block;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.guide .btn{align-self:flex-start}
 /* get */
 .get{background:var(--navy);color:#fff}
 .get .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;margin-top:30px}
@@ -97,6 +104,17 @@ details p{color:var(--muted);margin-top:10px}
 .final p{color:#dbe4ff;font-size:19px;max-width:640px;margin:0 auto 28px}
 footer{background:#060f26;color:#8795bd;text-align:center;font-size:14px;padding:26px 20px}
 footer a{color:#c8d3f5}
+@media (max-width:560px){
+ .book{flex-direction:row}
+ .book .cover{width:124px;flex:none;padding:14px 12px;display:flex;align-items:center}
+ .book .body{padding:14px 14px 16px}
+ .book h3{font-size:18px}
+ .book p{font-size:14px}
+ .book .buy{flex-direction:column;align-items:flex-start;gap:8px;margin-top:12px}
+ .book .btn{padding:10px 16px;font-size:14px}
+ .tag{top:8px;left:8px;max-width:108px;font-size:9px;line-height:1.25;padding:3px 7px;text-align:center}
+ .grid{gap:16px}
+}
 @media (max-width:860px){
  .hero .wrap,.about .wrap{grid-template-columns:1fr}
  .fan{height:320px;max-width:420px;margin:0 auto;width:100%}
@@ -154,6 +172,7 @@ footer a{color:#c8d3f5}
    <article class="book"><div class="cover"><img src="assets/bringing-up-god-fearing-children.jpg" alt="Bringing Up God-Fearing Children cover" loading="lazy"></div><div class="body"><h3>Bringing Up God-Fearing Children</h3><p>Biblical, practical wisdom for raising children who love God, honour His Word and live with godly character.</p><div class="buy"><div class="price">XAF 3,500<small>US$6.29</small></div><a class="btn" href="https://selar.com/4z74a47080">Get Instant Access</a></div></div></article>
    <article class="book"><div class="cover"><img src="assets/dating-on-purpose.jpg" alt="Dating on Purpose cover" loading="lazy"></div><div class="body"><h3>Dating on Purpose</h3><p>Intentional, honest, boundaried dating, from the "talking stage" to the wedding day, on solid ground.</p><div class="buy"><div class="price">XAF 2,500<small>US$4.49</small></div><a class="btn" href="https://selar.com/a94p63iw05">Get Instant Access</a></div></div></article>
    <article class="book"><div class="cover"><img src="assets/waiting-well.jpg" alt="Waiting Well cover" loading="lazy"></div><div class="body"><h3>Waiting Well</h3><p>Singleness is not a waiting room. A grace-filled guide to living fully now, without settling for less.</p><div class="buy"><div class="price">XAF 2,500<small>US$4.49</small></div><a class="btn" href="https://selar.com/070107n8pz">Get Instant Access</a></div></div></article>
+   <aside class="guide"><h3>Not sure where to start?</h3><ul><li><b>Married or engaged</b>God's Blueprint for a Strong Christian Marriage</li><li><b>Raising children</b>Bringing Up God-Fearing Children</li><li><b>Single</b>Waiting Well or Dating on Purpose</li><li><b>Your own walk with God</b>The Driver, the newest book</li></ul><a class="btn" href="#faq">More answers</a></aside>
   </div>
 
   <div class="shelf-title">Faith &amp; Christian Living</div>
@@ -194,7 +213,7 @@ footer a{color:#c8d3f5}
  </div>
 </section>
 
-<section class="faq">
+<section class="faq" id="faq">
  <div class="wrap">
   <div class="eyebrow">Questions</div>
   <h2>Before you buy</h2>
@@ -216,5 +235,7 @@ footer a{color:#c8d3f5}
 
 <footer>© <span id="y">2026</span> Pastor Mega Philip Mega · <a href="https://selar.com/m/megaphilipmega">Full store on Selar</a></footer>
 <script>document.getElementById('y').textContent = new Date().getFullYear();</script>
+<script defer src="/_vercel/insights/script.js"></script>
+<script defer src="/_vercel/speed-insights/script.js"></script>
 </body>
 </html>
